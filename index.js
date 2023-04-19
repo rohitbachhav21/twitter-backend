@@ -1,13 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config()
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const DATABASE = process.env.DATABASE
-const bodyParser = require("body-parser");
-const stripe_secret = process.env.stripe_secret
-const stripe = require("stripe")(
-  "sk_test_51MuxqwSI1PVmUJHRcGQueZR0UMe0msLkkQvQ89Yjveg4t29KZfcEw5vev4y82tu7Gco6gR7DNpAmINrOVRyl8QnF00QjyrDKUK"
-);
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,11 +10,9 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 ////////
-app.use(bodyParser.json());
 
-const uri =
-  "mongodb+srv://projectclone123:keFC410QOsFOsHYJ@cluster1.l5aeehs.mongodb.net/?retryWrites=true&w=majority";
 
+const uri = `mongodb+srv://${process.env.REACT_APP_USERNAME}:${process.env.REACT_APP_PASSWORD}@cluster1.l5aeehs.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
